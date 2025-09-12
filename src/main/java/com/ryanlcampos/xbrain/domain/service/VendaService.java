@@ -1,5 +1,10 @@
 package com.ryanlcampos.xbrain.domain.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +21,28 @@ public class VendaService {
     private VendedorService vendedorService;
 
     public Venda salvar(Venda venda) {
-
         
         Vendedor vendedor = vendedorService.obterPorId(venda.getVendedor().getId());
 
         venda.setVendedor(vendedor);
         
         return vendaRepository.save(venda);
+    }
+
+    public List<Object[]> obterVendasPorVendedor(LocalDateTime inicio, LocalDateTime fim){
+        
+        List<Object[]> resultados = vendaRepository.obterVendasPorVendedores(inicio, fim);
+
+        List<Object[]> lista = new ArrayList<>();
+
+        for(Object[] valor : resultados) {
+            String nome = (String) valor[0];
+            BigDecimal total = ((BigDecimal) valor[1]).setScale(2);
+            BigDecimal media = ((BigDecimal) valor[2]).setScale(2);
+
+            lista.add(new Object[]{nome, total, media});
+        }
+
+        return lista;
     }
 }
