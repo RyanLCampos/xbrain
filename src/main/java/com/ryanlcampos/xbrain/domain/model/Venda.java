@@ -41,7 +41,6 @@ public class Venda {
     @Column(nullable = false)
     private BigDecimal valor;
 
-    @NotNull(message = "Vendedor é obrigatório")
     @ManyToOne
     @JoinColumn(nullable = false)
     private Vendedor vendedor;
