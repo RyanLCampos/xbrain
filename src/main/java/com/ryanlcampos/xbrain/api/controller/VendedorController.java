@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ryanlcampos.xbrain.domain.model.Vendedor;
 import com.ryanlcampos.xbrain.domain.service.VendedorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/vendedores")
 public class VendedorController {
@@ -20,8 +22,8 @@ public class VendedorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Vendedor adicionar(@RequestBody Vendedor vendedor) {
-
+    public Vendedor adicionar(@RequestBody @Valid Vendedor vendedor) {
+        
         return vendedorService.salvar(vendedor);
     }
 }

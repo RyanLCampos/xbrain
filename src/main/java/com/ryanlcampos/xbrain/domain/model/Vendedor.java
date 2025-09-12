@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,6 +21,7 @@ public class Vendedor {
     @Id
     private Long id;
 
+    @NotBlank(message = "O nome do vendedor é obrigatório")
     @Column(nullable = false)
     private String nome;
 }
