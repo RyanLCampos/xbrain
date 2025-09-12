@@ -13,6 +13,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,6 +29,7 @@ public class Venda {
     @Id
     private Long id;
 
+    @PastOrPresent(message = "A data de venda não pode ser futura")
     @Column(nullable = false)
     private LocalDateTime dataVenda;
 
@@ -38,6 +41,7 @@ public class Venda {
     }
 
     @NotNull(message = "Valor é obrigatório")
+    @Positive(message = "Valor deve ser positivo")
     @Column(nullable = false)
     private BigDecimal valor;
 
