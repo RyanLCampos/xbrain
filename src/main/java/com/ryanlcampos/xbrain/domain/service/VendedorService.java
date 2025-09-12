@@ -3,6 +3,7 @@ package com.ryanlcampos.xbrain.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ryanlcampos.xbrain.domain.exceptions.EntidadeNaoEncontradoException;
 import com.ryanlcampos.xbrain.domain.model.Vendedor;
 import com.ryanlcampos.xbrain.domain.repository.VendedorRepository;
 
@@ -18,6 +19,6 @@ public class VendedorService {
 
     public Vendedor obterPorId(Long id) {
         return vendedorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Vendedor não encontrado"));
+                .orElseThrow(() -> new EntidadeNaoEncontradoException("Vendedor não encontrado"));
     }
 }
