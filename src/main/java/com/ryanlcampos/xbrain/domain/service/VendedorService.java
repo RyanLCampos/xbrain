@@ -8,11 +8,16 @@ import com.ryanlcampos.xbrain.domain.repository.VendedorRepository;
 
 @Service
 public class VendedorService {
-    
+
     @Autowired
     private VendedorRepository vendedorRepository;
 
-    public Vendedor salvar(Vendedor vendedor){
+    public Vendedor salvar(Vendedor vendedor) {
         return vendedorRepository.save(vendedor);
+    }
+
+    public Vendedor obterPorId(Long id) {
+        return vendedorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vendedor não encontrado"));
     }
 }
