@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,13 @@ public class Venda {
 
     @Column(nullable = false)
     private LocalDateTime dataVenda;
+
+    @PrePersist
+    public void PrePersist() {
+        if(dataVenda == null) {
+            dataVenda = LocalDateTime.now();
+        }
+    }
 
     @Column(nullable = false)
     private BigDecimal valor;
