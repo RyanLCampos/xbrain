@@ -44,6 +44,6 @@ public class VendaController {
     @GetMapping("/vendas-por-vendedor")
     public List<Object[]> resumoVendas(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fim) {
-        return vendaService.obterVendasPorVendedor(inicio, fim);
+        return vendaService.obterVendasPorVendedores(inicio, fim);
     }
 }

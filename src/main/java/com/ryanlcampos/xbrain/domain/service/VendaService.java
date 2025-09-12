@@ -1,6 +1,7 @@
 package com.ryanlcampos.xbrain.domain.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class VendaService {
         return vendaRepository.save(venda);
     }
 
-    public List<Object[]> obterVendasPorVendedor(LocalDateTime inicio, LocalDateTime fim){
+    public List<Object[]> obterVendasPorVendedores(LocalDateTime inicio, LocalDateTime fim){
         
         List<Object[]> resultados = vendaRepository.obterVendasPorVendedores(inicio, fim);
 
@@ -37,8 +38,8 @@ public class VendaService {
 
         for(Object[] valor : resultados) {
             String nome = (String) valor[0];
-            BigDecimal total = ((BigDecimal) valor[1]).setScale(2);
-            BigDecimal media = ((BigDecimal) valor[2]).setScale(2);
+            BigDecimal total = ((BigDecimal) valor[1]).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal media = ((BigDecimal) valor[2]).setScale(2, RoundingMode.HALF_UP);
 
             lista.add(new Object[]{nome, total, media});
         }
