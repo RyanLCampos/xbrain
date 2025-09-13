@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,18 +32,24 @@ public class VendaService {
         return vendaRepository.save(venda);
     }
 
-    public List<Object[]> obterVendasPorVendedores(LocalDateTime inicio, LocalDateTime fim){
+    public List<Map<String, Object>> obterVendasPorVendedores(LocalDateTime inicio, LocalDateTime fim){
         
         List<Object[]> resultados = vendaRepository.obterVendasPorVendedores(inicio, fim);
 
-        List<Object[]> lista = new ArrayList<>();
+        List<Map<String, Object>> lista = new ArrayList<>();
 
         for(Object[] valor : resultados) {
             String nome = (String) valor[0];
             BigDecimal total = ((BigDecimal) valor[1]).setScale(2, RoundingMode.HALF_UP);
             BigDecimal media = ((BigDecimal) valor[2]).setScale(2, RoundingMode.HALF_UP);
 
-            lista.add(new Object[]{nome, total, media});
+            Map<String, Object> elemento = new LinkedHashMap<>();
+
+            elemento.put("nome", nome);
+            elemento.put("totalVendas", total);
+            elemento.put("mediaDiaria", media);
+
+            lista.add(elemento);
         }
 
         return lista;

@@ -2,6 +2,7 @@ package com.ryanlcampos.xbrain.api.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,7 +43,7 @@ public class VendaController {
     }
 
     @GetMapping("/vendas-por-vendedor")
-    public List<Object[]> resumoVendas(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
+    public List<Map<String, Object>> resumoVendas(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fim) {
         return vendaService.obterVendasPorVendedores(inicio, fim);
     }

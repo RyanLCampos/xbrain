@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -97,14 +98,14 @@ public class VendaServiceTest {
 
         when(vendaRepository.obterVendasPorVendedores(inicio, fim)).thenReturn(registros);
 
-        List<Object[]> resultado = vendaService.obterVendasPorVendedores(inicio, fim);
+        List<Map<String, Object>> resultado = vendaService.obterVendasPorVendedores(inicio, fim);
 
         assertEquals(1, resultado.size());
 
-        Object[] linha = resultado.get(0);
-        assertEquals("Ryan Lucas", linha[0]);
-        assertEquals(new BigDecimal("154.35"), linha[1]);
-        assertEquals(new BigDecimal("10.56"), linha[2]);
+        Map<String, Object> elemento = resultado.get(0);
+        assertEquals("Ryan Lucas", elemento.get("nome"));
+        assertEquals(new BigDecimal("154.35"), elemento.get("totalVendas"));
+        assertEquals(new BigDecimal("10.56"), elemento.get("mediaDiaria"));
 
         verify(vendaRepository, times(1)).obterVendasPorVendedores(inicio, fim);
     }
@@ -116,7 +117,7 @@ public class VendaServiceTest {
 
         when(vendaRepository.obterVendasPorVendedores(inicio, fim)).thenReturn(new ArrayList<>());
 
-        List<Object[]> resultado = vendaService.obterVendasPorVendedores(inicio, fim);
+        List<Map<String, Object>> resultado = vendaService.obterVendasPorVendedores(inicio, fim);
 
         assertEquals(0, resultado.size());
     }
