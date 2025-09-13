@@ -1,6 +1,6 @@
 package com.ryanlcampos.xbrain.domain.repository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,8 +17,8 @@ public interface VendaRepository extends JpaRepository<Venda, Long>{
                SUM(v.valor), 
                SUM(v.valor) / COUNT(DISTINCT CAST(v.dataVenda AS DATE))
         FROM Venda v
-        WHERE v.dataVenda BETWEEN :inicio AND :fim
+        WHERE CAST(v.dataVenda AS DATE) BETWEEN :inicio AND :fim
         GROUP BY v.vendedor.nome
     """)
-    List<Object[]> obterVendasPorVendedores(@Param("inicio") LocalDateTime inicio, @Param("fim") LocalDateTime fim);
+    List<Object[]> obterVendasPorVendedores(@Param("inicio") LocalDate inicio, @Param("fim") LocalDate fim);
 }

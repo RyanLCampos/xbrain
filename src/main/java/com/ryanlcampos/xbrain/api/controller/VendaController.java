@@ -1,6 +1,6 @@
 package com.ryanlcampos.xbrain.api.controller;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -43,8 +43,8 @@ public class VendaController {
     }
 
     @GetMapping("/vendas-por-vendedor")
-    public List<Map<String, Object>> resumoVendas(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
-                                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fim) {
+    public List<Map<String, Object>> resumoVendas(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate inicio,
+                                       @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate fim) {
         return vendaService.obterVendasPorVendedores(inicio, fim);
     }
 }

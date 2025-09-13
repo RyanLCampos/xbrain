@@ -1,7 +1,7 @@
 package com.ryanlcampos.xbrain.domain.service;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -88,8 +88,8 @@ public class VendaServiceTest {
 
     @Test
     void deveRetornarListaDeVendedoresEVendas() {
-        LocalDateTime inicio = LocalDateTime.of(2025, 9, 1, 0, 0);
-        LocalDateTime fim = LocalDateTime.of(2025, 9, 12, 0, 0);
+        LocalDate inicio = LocalDate.of(2025, 9, 1);
+        LocalDate fim = LocalDate.of(2025, 9, 12);
 
         Object[] registro = {"Ryan Lucas", new BigDecimal(154.352), new BigDecimal(10.564)};
 
@@ -112,8 +112,8 @@ public class VendaServiceTest {
 
     @Test
     void deveRetornarListaVaziaQuandoNaoHouverVendas() {
-        LocalDateTime inicio = LocalDateTime.now().minusDays(10);
-        LocalDateTime fim = LocalDateTime.now();
+        LocalDate inicio = LocalDate.now().minusDays(10);
+        LocalDate fim = LocalDate.now();
 
         when(vendaRepository.obterVendasPorVendedores(inicio, fim)).thenReturn(new ArrayList<>());
 

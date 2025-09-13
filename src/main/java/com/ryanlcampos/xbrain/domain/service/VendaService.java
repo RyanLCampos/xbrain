@@ -2,7 +2,7 @@ package com.ryanlcampos.xbrain.domain.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,7 +32,7 @@ public class VendaService {
         return vendaRepository.save(venda);
     }
 
-    public List<Map<String, Object>> obterVendasPorVendedores(LocalDateTime inicio, LocalDateTime fim){
+    public List<Map<String, Object>> obterVendasPorVendedores(LocalDate inicio, LocalDate fim){
         
         List<Object[]> resultados = vendaRepository.obterVendasPorVendedores(inicio, fim);
 
