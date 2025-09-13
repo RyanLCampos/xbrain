@@ -24,6 +24,10 @@ public class VendaService {
     private VendedorService vendedorService;
 
     public Venda salvar(Venda venda) {
+
+        if(venda.getVendedor() == null) {
+            throw new IllegalArgumentException("Vendedor é obrigatório");
+        }
         
         Vendedor vendedor = vendedorService.obterPorId(venda.getVendedor().getId());
 
